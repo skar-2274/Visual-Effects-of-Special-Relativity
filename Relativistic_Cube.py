@@ -52,9 +52,7 @@ def generate_cube_lines(smax, B, robs, s_values):
     for start, end in edges:
         start = np.array(start)
         end = np.array(end)
-        # Calculate the direction vector
         direction = end - start
-        # Compute lines along this direction
         lines.append(compute_line(*start, *direction, *B, *robs, s_values))
 
     return lines
@@ -74,7 +72,6 @@ def plot_cube():
 
 plot_cube()
 
-# Slider axis setup on the right-hand side
 slider_width = 0.10
 slider_height = 0.10
 ax_slider_Bx = plt.axes([0.75, 0.8, slider_width, slider_height])
@@ -91,7 +88,6 @@ slider_robsx = Slider(ax_slider_robsx, 'Obs x', -1000, 1000, valinit=robs[1], or
 slider_robsy = Slider(ax_slider_robsy, 'Obs y', -1000, 1000, valinit=robs[2], orientation='horizontal')
 slider_robsz = Slider(ax_slider_robsz, 'Obs z', -1000, 1000, valinit=robs[3], orientation='horizontal')
 
-# Update plot based on slider values
 def update(val):
     global B, robs
     B = np.array([slider_Bx.val, slider_By.val, slider_Bz.val])
@@ -99,7 +95,6 @@ def update(val):
 
     plot_cube()
 
-# Register the update function with the sliders
 slider_Bx.on_changed(update)
 slider_By.on_changed(update)
 slider_Bz.on_changed(update)
