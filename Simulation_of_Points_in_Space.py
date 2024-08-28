@@ -27,7 +27,7 @@ def doppler_shift(B, direction):
 def compute_transformed_point(rx, ry, rz, B, robs):
     """Compute the transformed point coordinates based on relativistic effects."""
     rp = np.array([rx, ry, rz])
-    a = np.array([4, 8, 9])  # Distance between frames
+    a = np.array([4, 8, 9])  # Distance between frames. This can be altered.
     Y = lorentz_factor(B)
     p = Y * np.dot(B, rp)
     n = rp + (Y**2 * np.dot(B, rp) * B) / (Y + 1) + a - robs
@@ -56,7 +56,7 @@ def plot_universe(ax):
     xs, ys, zs = points.T
     ax.scatter(xs, ys, zs, c=redshifts, cmap='coolwarm' if doppler_effect else 'gray', s=5)
 
-    ax.set_axis_off()  # Hide the 3D box and axes
+    ax.set_axis_off()
     ax.grid(False)
     ax.set_xlim([pmin, pmax])
     ax.set_ylim([pmin, pmax])
