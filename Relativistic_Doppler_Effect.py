@@ -51,7 +51,6 @@ B_init = 0.0
 n_init = 10
 color_lines_init = True
 
-# Create the plot
 fig, ax = plt.subplots(figsize=(6, 6))
 plt.subplots_adjust(left=0.1, bottom=0.3)
 ax.set_xlim([-2.5, 2.5])
@@ -61,7 +60,6 @@ ax.set_aspect('equal')
 ax.xaxis.set_visible(False)
 ax.yaxis.set_visible(False)
 
-# Plotting function
 def plot_graph(B, n, color_lines):
     ax.clear()
     ax.set_xlim([-2.5, 2.5])
@@ -91,19 +89,15 @@ def plot_graph(B, n, color_lines):
 # Draw the initial plot
 plot_graph(B_init, n_init, color_lines_init)
 
-# Slider for B
 ax_B = plt.axes([0.1, 0.2, 0.65, 0.03], facecolor='lightgoldenrodyellow')
 slider_B = Slider(ax_B, r'Scaled Velocity $\beta$', -0.999, 0.999, valinit=B_init)
 
-# Slider for n
 ax_n = plt.axes([0.1, 0.1, 0.65, 0.03], facecolor='lightgoldenrodyellow')
 slider_n = Slider(ax_n, 'Number of Light Rays', 10, 100, valinit=n_init, valstep=1)
 
-# Checkbox for color_lines
 ax_col = plt.axes([0.8, 0.1, 0.15, 0.15])
 checkbox_col = CheckButtons(ax_col, ['Show Doppler Effect'], [color_lines_init])
 
-# Update function
 def update(val):
     B = slider_B.val
     n = int(slider_n.val)
