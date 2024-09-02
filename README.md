@@ -1,7 +1,7 @@
 # Visual-Effects-of-Special-Relativity
 Simulations to show the distortion of objects under relativistic conditions.
 
-Relativistic_Aberration.py allows the user to input desired images to observe spatial distortion as a result of relativistic conditions.
+Relativistic_Aberration.py allows the user to input desired images to observe spatial distortion due to relativistic conditions.
 
 Relativistic_Cube.py allows the user to simulate a cube to apply relativistic velocities in any direction and adjust the observer's position freely in space.
 
