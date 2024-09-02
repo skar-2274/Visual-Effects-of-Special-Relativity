@@ -7,7 +7,6 @@ from PIL import Image
 def f(phi, B):
     return np.arccos((np.cos(phi) + B) / (1 + B * np.cos(phi)))
 
-# Polar coordinates to Cartesian
 def to_polar(x, y):
     r = np.sqrt(x**2 + y**2)
     phi = np.arctan2(y, x)
@@ -18,38 +17,30 @@ def from_polar(r, phi):
     y = r * np.sin(phi)
     return x, y
 
-# Symmetric relativistic aberration function in Cartesian form
 def rnew(r, B):
     cos_phi = (np.cos(r) + B) / (1 + B * np.cos(r))
     cos_phi = np.clip(cos_phi, -1, 1)
     return np.arccos(cos_phi)
 
-# Image transformation
 def apply_transformation(image, B, m=0.8*np.pi):
     width, height = image.size
     x_center, y_center = width / 2, height / 2
 
-    # Generates the grid of coordinates
     x = np.linspace(-m, m, width)
     y = np.linspace(-m, m, height)
     xv, yv = np.meshgrid(x, y)
-
-    # Converts to polar coordinates
+    
     r, phi = to_polar(xv, yv)
 
-    # Applies the transformation
     r_transformed = rnew(r, B)
     xv_new, yv_new = from_polar(r_transformed, phi)
 
-    # Converts back to pixel coordinates
     xv_new_pixel = ((xv_new + m) / (2 * m) * width).astype(int)
     yv_new_pixel = ((yv_new + m) / (2 * m) * height).astype(int)
 
-    # Values are clipped to be within image bounds
     xv_new_pixel = np.clip(xv_new_pixel, 0, width-1)
     yv_new_pixel = np.clip(yv_new_pixel, 0, height-1)
 
-    # Image mapping 
     transformed_image = np.array(image)[yv_new_pixel, xv_new_pixel]
 
     return Image.fromarray(transformed_image)
