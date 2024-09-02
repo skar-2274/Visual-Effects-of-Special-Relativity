@@ -23,7 +23,7 @@ cmap = LinearSegmentedColormap.from_list("Redshift", ["blue", "white", "red"])
 def normalize_doppler(doppler_value):
     return np.clip(doppler_value - 0.5, 0, 1)
 
-# Function to create lines in the specified direction
+# Creates lines in the specified direction
 def create_lines(B, n, color_lines, direction='up'):
     lines = []
     for i in range(n + 1 if direction == 'down' else n):
@@ -41,7 +41,6 @@ def create_lines(B, n, color_lines, direction='up'):
         lines.append((x, y, color))
     return lines
 
-# Function to plot the arrows
 def draw_arrow(B):
     arrow_coords = [[-0.1, -0.1], [0.1, 0], [-0.1, 0.1]] if B >= 0 else [[0.1, -0.1], [-0.1, 0], [0.1, 0.1]]
     return Polygon(arrow_coords, edgecolor='black', facecolor='yellow')
@@ -86,7 +85,6 @@ def plot_graph(B, n, color_lines):
     ax.set_title('Relativistic Doppler Effect', color='black', fontsize=14)
     fig.canvas.draw_idle()
 
-# Draw the initial plot
 plot_graph(B_init, n_init, color_lines_init)
 
 ax_B = plt.axes([0.1, 0.2, 0.65, 0.03], facecolor='lightgoldenrodyellow')
