@@ -11,12 +11,10 @@ robs = np.array([0.0, 0.0, 0.0])  # Observer coordinates
 pmin, pmax = -1000, 1000  # Range for random points, match this with the num_points value
 
 def lorentz_factor(B):
-    """Calculate Lorentz factor."""
     beta = np.linalg.norm(B)
     return 1 / np.sqrt(1 - beta**2) if beta < 1 else np.inf
 
 def doppler_shift(B, direction):
-    """Calculate Doppler shift for a given direction."""
     beta = np.linalg.norm(B)
     if beta >= 1:
         raise ValueError("Beta should be less than 1 for physical velocities.")
@@ -25,7 +23,6 @@ def doppler_shift(B, direction):
     return np.sqrt((1 + beta * cos_theta) / (1 - beta * cos_theta))
 
 def compute_transformed_point(rx, ry, rz, B, robs):
-    """Compute the transformed point coordinates based on relativistic effects."""
     rp = np.array([rx, ry, rz])
     a = np.array([4, 8, 9])  # Distance between frames. This can be altered.
     Y = lorentz_factor(B)
@@ -36,12 +33,10 @@ def compute_transformed_point(rx, ry, rz, B, robs):
     return Y * ro * B + n + robs
 
 def generate_random_points(B, robs, pmin, pmax, num_points=1000): # num_points can be adjusted
-    """Generate and store random points within the specified range."""
     global stored_points
     stored_points = [compute_transformed_point(*np.random.uniform(pmin, pmax, 3), B, robs) for _ in range(num_points)]
 
 def plot_universe(ax):
-    """Plot the universe with or without Doppler effect."""
     if not stored_points:
         generate_random_points(B, robs, pmin, pmax)
 
@@ -70,7 +65,6 @@ def plot_universe(ax):
     ax.dist = 100  # Set distance from plot
 
 def main():
-    """Main function to set up the plot and sliders."""
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d', facecolor='black')
 
