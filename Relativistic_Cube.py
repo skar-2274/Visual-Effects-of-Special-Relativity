@@ -34,7 +34,6 @@ smax = 1000 # Size of the cube
 s_values = np.linspace(0, smax, 100)
 robso = 0.0
 
-# Create the figure and axis
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
 
@@ -57,7 +56,6 @@ def generate_cube_lines(smax, B, robs, s_values):
 
     return lines
 
-# Initial plot
 def plot_cube():
     ax.clear()
     line_segments = generate_cube_lines(smax, B, robs[1:], s_values)
